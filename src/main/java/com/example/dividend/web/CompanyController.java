@@ -22,17 +22,14 @@ public class CompanyController {
         return null;
     }
 
+    // 회사 목록 조회
     @GetMapping
     public ResponseEntity<?> searchCompany(final Pageable pageable) {
         Page<CompanyEntity> companies = companyService.getAllCompany(pageable);
         return ResponseEntity.ok(companies);
     }
 
-    /**
-     * 회사 및 배당금 정보 추가
-     * @param request
-     * @return
-     */
+    // 회사 및 배당금 정보 추가
     @PostMapping
     public ResponseEntity<?> addCompany(@RequestBody Company request) {
         String ticker = request.getTicker().trim();

@@ -37,16 +37,16 @@ public class CompanyService {
     }
 
     private Company storeCompanyAndDividend(String ticker) {
-        // ticker 를 기준으로 회사를 스크래핑한다.
+        // 1. ticker 를 기준으로 회사를 스크래핑한다.
         Company company = yahooFinanceScraper.scrapCompanyByTicker(ticker);
         if (ObjectUtils.isEmpty(company)) {
             throw new RuntimeException("failed to scrap ticker -> " + ticker);
         }
 
-        // 해당 회사가 존재할 경우 회사의 배당금 정보를 스크래핑한다.
+        // 2. 해당 회사가 존재할 경우 회사의 배당금 정보를 스크래핑한다.
         ScrapedResult scrapedResult = yahooFinanceScraper.scrap(company);
 
-        // 스크래핑 결과
+        // 3. 스크래핑 결과
         CompanyEntity companyEntity = companyRepository.save(new CompanyEntity(company));
         List<DividendEntity> dividendEntityList = scrapedResult.getDividends().stream()
                             .map(e -> new DividendEntity(companyEntity.getId(), e))
