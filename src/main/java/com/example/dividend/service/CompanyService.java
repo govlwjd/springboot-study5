@@ -1,5 +1,6 @@
 package com.example.dividend.service;
 
+import com.example.dividend.exception.impl.NoCompanyException;
 import com.example.dividend.model.Company;
 import com.example.dividend.model.ScrapedResult;
 import com.example.dividend.persist.entity.CompanyEntity;
@@ -82,7 +83,7 @@ public class CompanyService {
 
     public String deleteCompany(String ticker) {
         var company = companyRepository.findByTicker(ticker)
-                                    .orElseThrow(() -> new RuntimeException("존재하지 않는 회사입니다."));
+                                    .orElseThrow(() -> new NoCompanyException());
         dividendRepository.deleteAllByCompanyId(company.getId());
         companyRepository.delete(company);
         deleteAutocompleteKeyword(company.getName());
