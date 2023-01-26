@@ -8,9 +8,7 @@
 - Spring Boot 2.5.6
 - JPA
 - H2
-- Redis
 - Jsoup
-- Docker
 
 ### 주요 기능
 - 회원가입 및 로그인
