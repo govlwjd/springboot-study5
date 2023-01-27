@@ -36,3 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
+### JWT ###
+src/main/resources/application-jwt.yml
